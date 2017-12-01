@@ -1,0 +1,14 @@
+version: '2’
+services:
+  web:
+    image: mop:latest
+    command: bundle exec puma -p 3000 -e production
+    environment:
+      - =mongodb://mongodb:27017/todo_production
+    ports:
+      - 3000:3000
+    links:
+      - mongodb:mongodb
+  postgres:
+    image: mongo:3.2
+    command: mongod --smallfiles
